@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cerrno>
 #include <unistd.h>
+#include <string>
 #include "mpi.h"
 
 //run compiled code (for 5 philosophers) with mpirun -n 6 program
@@ -40,7 +41,7 @@ int main ( int argc, char *argv[] )
   if ( id == 0 ) //Master
   {
 	int msgIn; //messages are integers
-	  
+	cout << id << endl;  
 	//let the philosophers check in
     for (int i = 1; i < p; i++) {
 		MPI::COMM_WORLD.Recv ( &msgIn, 1, MPI::INT, MPI::ANY_SOURCE, tag, status );
@@ -51,6 +52,7 @@ int main ( int argc, char *argv[] )
   }
   else //I'm a philosopher
   {
+	cout << id << endl;
 /* NOTE: The following code sends a random integer (message) back to the server. You do 
  *
  *                            * * * * * * * * NOT * * * * * * * * 
@@ -60,6 +62,16 @@ int main ( int argc, char *argv[] )
  * resources, etc.)
  */
     int msgOut = rand() % p; //pick a number between 0 and the number of philosophers
+	string msg;
+	switch(msgOut){
+	case 1:msg = "requesting to eat";
+	case 2:msg = "being allow
+	case 3:
+	case 4:
+	case 5:
+	default: cout << "Busted" << endl;break;
+	}
+	cout << msg << endl;
 	
 	std::cout << "This is Philosopher " << id << " sending message of " << msgOut << std::endl;
 	
