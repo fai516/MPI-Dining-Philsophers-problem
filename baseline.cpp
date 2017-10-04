@@ -62,18 +62,18 @@ int main ( int argc, char *argv[] )
  * resources, etc.)
  */
     int msgOut = rand() % p; //pick a number between 0 and the number of philosophers
-	string msg;
+	std::string msg;
 	switch(msgOut){
-	case 1:msg = "requesting to eat";
-	case 2:msg = "being allow
-	case 3:
-	case 4:
-	case 5:
+	case 0:msg = "0msg";break;
+	case 1:msg = "requesting to eat";break;
+	case 2:msg = "being allowed to eat";break;
+	case 3:msg = "3msg";break;
+	case 4:msg = "4msg";break;
+	case 5:msg = "5msg";break;
 	default: cout << "Busted" << endl;break;
 	}
-	cout << msg << endl;
 	
-	std::cout << "This is Philosopher " << id << " sending message of " << msgOut << std::endl;
+	std::cout << "This is Philosopher " << id << " sending message of " << msg << std::endl;
 	
    	//check in with master - send a random number (node 0 = master)
 	MPI::COMM_WORLD.Send ( &msgOut, 1, MPI::INT, 0, tag ); 
